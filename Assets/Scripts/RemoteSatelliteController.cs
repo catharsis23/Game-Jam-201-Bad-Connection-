@@ -90,5 +90,7 @@ public class RemoteSatelliteController : MonoBehaviour
 
         Debug.Log("Colliders Tocuhing: " + colliderCount);
 
+        GameObject.Find("GameManager").GetComponent<GameManager>().remainingRemoteSatellites--;
+
     }
 }

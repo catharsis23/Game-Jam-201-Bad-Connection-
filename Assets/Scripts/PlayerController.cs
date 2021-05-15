@@ -53,6 +53,12 @@ public class PlayerController : MonoBehaviour
                 {
                     activeSatellite = transform.GetChild(1).gameObject;
                     activeSatellite.GetComponent<RemoteSatelliteController>().isActive = true;
+                    for (int i = 1; i < transform.childCount; i++)
+                    {
+                        //best we are going to get for now, moves the following remotes into position
+                        transform.GetChild(i).Translate(Vector3.up *.67f * 330 * Time.deltaTime);
+
+                    }
 
                 }
             } else if (Input.GetKeyDown(KeyCode.Space) && isRemoteSatelliteLaunched == false)

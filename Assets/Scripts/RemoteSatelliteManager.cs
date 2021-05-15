@@ -5,11 +5,14 @@ using UnityEngine;
 public class RemoteSatelliteManager : MonoBehaviour
 {
     public int startingNumberOfSatellites;
+    public int remainingSatellites;
+
     public GameObject remoteSatellite;
 
     // Start is called before the first frame update
     void Start()
     {
+        remainingSatellites = startingNumberOfSatellites;
         GameObject player = GameObject.Find("Player");
         for (int i = 0; i < startingNumberOfSatellites; i++)
         {
