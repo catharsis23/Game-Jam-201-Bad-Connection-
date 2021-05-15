@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rocketRb = GetComponent<Rigidbody2D>();
-        rocketRb.AddForce(Vector3.down * 10, ForceMode2D.Impulse);
+        rocketRb.AddForce(Vector3.down * 1000, ForceMode2D.Impulse);
         isRemoteSatelliteLaunched = false;
 
     }
@@ -29,38 +29,71 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float height = rocketRb.transform.position.y - groundPosition;
 
         if (isConnected)
         {
 
-            //handle controls
-            float yAxis = Input.GetAxis("Vertical");
-            float xAxis = Input.GetAxis("Horizontal");
-
-            ThrustForward(xAxis);
-            ThrustUp(yAxis);
-
-            //Rotate(transform, xAxis * rotationSpeed);
+           
 
 
-            //handle launching and deploying satellite prefabs
-            if (Input.GetKeyDown(KeyCode.Space) && isRemoteSatelliteLaunched == false)
+            //only rotate while key down, do not move either
+            if (Input.GetKey(KeyCode.Space) && isRemoteSatelliteLaunched == false)
             {
-                if (transform.childCount > 1)
+                
+                if (activeSatellite == null)
                 {
-                    activeSatellite = transform.GetChild(1).gameObject;
+                    Debug.Log("Setting active satellite");
+                    for (int i = 1; i < transform.childCount; i++)
+                    {
+                        if (transform.GetChild(i).CompareTag("Satellite")){
+                            if (transform.GetChild(i).gameObject.GetComponent<RemoteSatelliteController>().isActive == true)
+                            {
+                                activeSatellite = transform.GetChild(i).gameObject;
+
+                            }
+                        }
+                    }
+                }
+                rocketRb.velocity = Vector2.zero;
+                activeSatellite.transform.parent = null;
+
+                //handle controls while space is down, only rotate satellites
+                //both axis are used because player naturally tries to use both to rotate
+                float xAxis = Input.GetAxis("Horizontal");
+                float yAxis = Input.GetAxis("Vertical");
+                Rotate(activeSatellite.transform, -xAxis * rotationSpeed);
+                Rotate(activeSatellite.transform, yAxis * rotationSpeed);
+
+
+            }
+            else
+            {
+                //handle controls
+                float yAxis = Input.GetAxis("Vertical");
+                float xAxis = Input.GetAxis("Horizontal");
+
+                ThrustForward(xAxis);
+                ThrustUp(yAxis);
+
+            }
+
+            //launch and deploy on key up not down
+            if (Input.GetKeyUp(KeyCode.Space) && isRemoteSatelliteLaunched == false)
+            {
+               
+                    //activeSatellite = transform.GetChild(1).gameObject;
                     activeSatellite.GetComponent<RemoteSatelliteController>().Launch();
                     isRemoteSatelliteLaunched = true;
 
                     realignRemoteSatellites();
-                }
+                
 
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && isRemoteSatelliteLaunched == true)
+            else if (Input.GetKeyUp(KeyCode.Space) && isRemoteSatelliteLaunched == true)
             {
                 activeSatellite.GetComponent<RemoteSatelliteController>().DeploySatellite();
                 isRemoteSatelliteLaunched = false;
+                activeSatellite = null;
 
 
 
@@ -86,20 +119,21 @@ public class PlayerController : MonoBehaviour
 
     private void ThrustForward(float amount)
     {
-        Vector2 force = transform.right * amount;
+        Vector2 force = transform.right * amount * rocketRb.mass;
         rocketRb.AddForce(force);
         ClampVelocity();
     }
 
     private void ThrustUp(float amount)
     {
-        Vector2 force = transform.up * amount;
+        Vector2 force = transform.up * amount * rocketRb.mass;
         rocketRb.AddForce(force);
         ClampVelocity();
     }
 
     private void Rotate(Transform t, float amount)
     {
+        Debug.Log("Rotating");
         t.Rotate(0, 0, amount);
     }
 
@@ -118,11 +152,11 @@ public class PlayerController : MonoBehaviour
         {
             if (!satellites[i].GetComponent<RemoteSatelliteController>().isActive)
             {
-                satellites[i].transform.Translate(Vector3.up * .33f);
+                satellites[i].transform.Translate(Vector3.right * .33f);
                 if (!isFirstSatelliteActived)
                 {
                     Debug.Log("Activating Next Satellite");
-                    satellites[i].GetComponent<RemoteSatelliteController>().isActive = true;
+                    satellites[i].GetComponent<RemoteSatelliteController>().isFirst = true;
                     isFirstSatelliteActived = true;
                 }
             }
