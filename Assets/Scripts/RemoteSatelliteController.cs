@@ -20,9 +20,12 @@ public class RemoteSatelliteController : MonoBehaviour
     {
        if (!isActive)
         {
-            GameObject child = transform.GetChild(0).gameObject;
-            child.SetActive(false);
-        } else
+            if (transform.childCount > 0)
+            {
+                GameObject child = transform.GetChild(0).gameObject;
+                child.SetActive(false);
+            }
+        } else if (isActive)
         {
             if (transform.childCount > 0)
             {
@@ -67,7 +70,7 @@ public class RemoteSatelliteController : MonoBehaviour
 
     private void ThrustForward(float amount)
     {
-        Vector2 force = transform.up * amount;
+        Vector2 force = transform.right * amount;
         remoteSatelliteRb.AddForce(force);
         ClampVelocity();
     }

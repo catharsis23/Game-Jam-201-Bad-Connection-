@@ -21,7 +21,7 @@ public class RemoteSatelliteManager : MonoBehaviour
             GameObject startingSatellite = Instantiate(remoteSatellite,
                 player.transform, false);
 
-            startingSatellite.transform.position = player.transform.position + new Vector3(-.67f, (-.5f * i) + .75f);
+            startingSatellite.transform.position = player.transform.position + new Vector3(.33f * i, -2, 0); //+ new Vector3(-1f, (-.5f * i) + 1f);
         
             //startingSatellite.transform.SetParent(player.transform);
             if (i == 0)

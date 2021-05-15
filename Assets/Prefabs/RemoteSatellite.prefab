@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5863398097820569916}
-  m_LocalRotation: {x: 0.27059805, y: -0.27059805, z: 0.6532815, w: 0.6532815}
-  m_LocalPosition: {x: -0.1, y: 26.6, z: 0.00000075036104}
-  m_LocalScale: {x: 75, y: 0.1, z: 4}
+  m_LocalRotation: {x: 0.001395301, y: -0.38268095, z: 0.0033689453, w: 0.9238734}
+  m_LocalPosition: {x: 27.02, y: 0.14, z: 76.05}
+  m_LocalScale: {x: 75, y: 0.3, z: 4}
   m_Children: []
   m_Father: {fileID: 5863398099075688120}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0.295, y: -44.999, z: 0.295}
 --- !u!212 &5863398097820569914
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5863398099075688118}
   m_Layer: 0
   m_Name: RemoteSatellite
-  m_TagString: Untagged
+  m_TagString: Satellite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,9 +107,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5863398099075688123}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7600002, y: 0.049999952, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.125, z: 0.25}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5863398097820569917}
   m_Father: {fileID: 0}
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.41509432, g: 0, b: 0.3598306, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

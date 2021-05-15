@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rocketRb;
-  //  public GameObject ground;
+    //  public GameObject ground;
     private float groundPosition;
     private float maxVelocity = 5;
     private float rotationSpeed = .5f;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rocketRb = GetComponent<Rigidbody2D>();
-        rocketRb.AddForce(transform.up * 10, ForceMode2D.Impulse);
+        rocketRb.AddForce(Vector3.down * 10, ForceMode2D.Impulse);
         isRemoteSatelliteLaunched = false;
 
     }
@@ -38,44 +38,36 @@ public class PlayerController : MonoBehaviour
             float yAxis = Input.GetAxis("Vertical");
             float xAxis = Input.GetAxis("Horizontal");
 
-            ThrustForward(yAxis);
+            ThrustForward(xAxis);
+            ThrustUp(yAxis);
 
-            Rotate(transform, xAxis * -rotationSpeed);
+            //Rotate(transform, xAxis * rotationSpeed);
 
 
             //handle launching and deploying satellite prefabs
-            if (Input.GetKeyDown(KeyCode.Space) && isRemoteSatelliteLaunched == true)
-            {
-                activeSatellite.GetComponent<RemoteSatelliteController>().DeploySatellite();
-                isRemoteSatelliteLaunched = false;
-                //since sensor is always child make sure there are satellites
-                if (transform.childCount > 1)
-                {
-                    activeSatellite = transform.GetChild(1).gameObject;
-                    activeSatellite.GetComponent<RemoteSatelliteController>().isActive = true;
-                    for (int i = 1; i < transform.childCount; i++)
-                    {
-                        //best we are going to get for now, moves the following remotes into position
-                        transform.GetChild(i).Translate(Vector3.up *.67f * 330 * Time.deltaTime);
-
-                    }
-
-                }
-            } else if (Input.GetKeyDown(KeyCode.Space) && isRemoteSatelliteLaunched == false)
+            if (Input.GetKeyDown(KeyCode.Space) && isRemoteSatelliteLaunched == false)
             {
                 if (transform.childCount > 1)
                 {
                     activeSatellite = transform.GetChild(1).gameObject;
                     activeSatellite.GetComponent<RemoteSatelliteController>().Launch();
                     isRemoteSatelliteLaunched = true;
+
+                    realignRemoteSatellites();
                 }
-                
+
+            }
+            else if (Input.GetKeyDown(KeyCode.Space) && isRemoteSatelliteLaunched == true)
+            {
+                activeSatellite.GetComponent<RemoteSatelliteController>().DeploySatellite();
+                isRemoteSatelliteLaunched = false;
+
+
+
             }
 
-            
-        }
 
-        
+        }
     }
 
 
@@ -94,6 +86,13 @@ public class PlayerController : MonoBehaviour
 
     private void ThrustForward(float amount)
     {
+        Vector2 force = transform.right * amount;
+        rocketRb.AddForce(force);
+        ClampVelocity();
+    }
+
+    private void ThrustUp(float amount)
+    {
         Vector2 force = transform.up * amount;
         rocketRb.AddForce(force);
         ClampVelocity();
@@ -105,6 +104,34 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    #region ammunition API
+
+    private void realignRemoteSatellites()
+    {
+        GameObject[] satellites = GameObject.FindGameObjectsWithTag("Satellite");
+
+        Debug.Log("Number of remotes: " + satellites.Length);
+
+        bool isFirstSatelliteActived = false;
+        for (int i = 0; i < satellites.Length; i++)
+        {
+            if (!satellites[i].GetComponent<RemoteSatelliteController>().isActive)
+            {
+                satellites[i].transform.Translate(Vector3.up * .33f);
+                if (!isFirstSatelliteActived)
+                {
+                    Debug.Log("Activating Next Satellite");
+                    satellites[i].GetComponent<RemoteSatelliteController>().isActive = true;
+                    isFirstSatelliteActived = true;
+                }
+            }
+        }
+    }
+
+    #endregion
+
+
 
 
 }
