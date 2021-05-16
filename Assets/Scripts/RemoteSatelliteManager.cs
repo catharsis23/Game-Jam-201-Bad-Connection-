@@ -39,7 +39,7 @@ public class RemoteSatelliteManager : MonoBehaviour
 
     public void ActivateFirstSatellite()
     {
-        GameObject[] satellites = GameObject.FindGameObjectsWithTag("Satellite");
+        GameObject[] satellites = GameObject.FindGameObjectsWithTag("RemoteSatellite");
 
         Debug.Log("Number of remotes: " + satellites.Length);
 

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5863398099075688118}
   m_Layer: 0
   m_Name: RemoteSatellite
-  m_TagString: Satellite
+  m_TagString: RemoteSatellite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,3 +181,4 @@ MonoBehaviour:
   targettingLaser: {fileID: 5863398097820569916}
   satellite: {fileID: 8894767072047905173, guid: 9cfe1c97d53401a43b943295043f91a0, type: 3}
   isActive: 0
+  isFirst: 0

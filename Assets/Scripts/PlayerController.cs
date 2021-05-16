@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rocketRb;
     //  public GameObject ground;
     private float groundPosition;
-    private float maxVelocity = 5;
+    private float maxVelocity = 10;
     private float rotationSpeed = .5f;
 
     public bool isConnected = false;
@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+        if (!isConnected && rocketRb.velocity == Vector2.zero)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().isStranded = true;
+        }
+
         if (isConnected)
         {
 
@@ -45,7 +50,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Setting active satellite");
                     for (int i = 1; i < transform.childCount; i++)
                     {
-                        if (transform.GetChild(i).CompareTag("Satellite")){
+                        if (transform.GetChild(i).CompareTag("RemoteSatellite")){
                             if (transform.GetChild(i).gameObject.GetComponent<RemoteSatelliteController>().isActive == true)
                             {
                                 activeSatellite = transform.GetChild(i).gameObject;
@@ -119,21 +124,29 @@ public class PlayerController : MonoBehaviour
 
     private void ThrustForward(float amount)
     {
-        Vector2 force = transform.right * amount * rocketRb.mass;
-        rocketRb.AddForce(force);
+        Vector2 force = transform.right * amount * (rocketRb.mass / 2);
+        rocketRb.AddForce(force, ForceMode2D.Impulse);
+        if (amount > 0)
+        {
+            transform.localScale = new Vector3(.5f, .5f, .5f);
+        }
+        if (amount < 0)
+        {
+            transform.localScale = new Vector3(-.5f, .5f, .5f);
+        }
         ClampVelocity();
     }
 
     private void ThrustUp(float amount)
     {
-        Vector2 force = transform.up * amount * rocketRb.mass;
-        rocketRb.AddForce(force);
+        Vector2 force = transform.up * amount * (rocketRb.mass / 2);
+        rocketRb.AddForce(force, ForceMode2D.Impulse);
+        
         ClampVelocity();
     }
 
     private void Rotate(Transform t, float amount)
     {
-        Debug.Log("Rotating");
         t.Rotate(0, 0, amount);
     }
 
@@ -143,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
     private void realignRemoteSatellites()
     {
-        GameObject[] satellites = GameObject.FindGameObjectsWithTag("Satellite");
+        GameObject[] satellites = GameObject.FindGameObjectsWithTag("RemoteSatellite");
 
         Debug.Log("Number of remotes: " + satellites.Length);
 

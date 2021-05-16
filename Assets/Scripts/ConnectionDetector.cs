@@ -44,10 +44,11 @@ public class ConnectionDetector : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("Left Satellite!");
-        rocket.GetComponent<PlayerController>().isConnected = true;
-        connectionDisplay.GetComponent<Image>().color = onColor;
-        sensor.GetComponent<SpriteRenderer>().color = onColor;
-
+        if (collision.CompareTag("Satellite")) { 
+            rocket.GetComponent<PlayerController>().isConnected = true;
+            connectionDisplay.GetComponent<Image>().color = onColor;
+            sensor.GetComponent<SpriteRenderer>().color = onColor;
+        }
 
     }
 }

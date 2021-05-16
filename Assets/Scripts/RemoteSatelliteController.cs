@@ -45,18 +45,21 @@ public class RemoteSatelliteController : MonoBehaviour
         transform.parent = null;
    
         //destroy targetting laser
-        Destroy(transform.GetChild(0).gameObject);
+        //Destroy(transform.GetChild(0).gameObject);
 
         //cannot have RB2D at launch, needs to generate once firing started
-        remoteSatelliteRb = gameObject.AddComponent<Rigidbody2D>();
+        remoteSatelliteRb = transform.gameObject.AddComponent<Rigidbody2D>();
         remoteSatelliteRb.gravityScale = 0;
-        remoteSatelliteRb.drag = .3f;
+        remoteSatelliteRb.drag = 0;
+        remoteSatelliteRb.angularDrag = 0;
+        remoteSatelliteRb.freezeRotation = true;
 
-        remoteSatelliteCC2D = gameObject.AddComponent<CircleCollider2D>();
+
+        //remoteSatelliteCC2D = gameObject.AddComponent<CircleCollider2D>();
        
 
         Debug.Log("Launching Satellite!");
-        ThrustForward(500);
+        ThrustForward(1000);
 
     }
 
@@ -72,8 +75,9 @@ public class RemoteSatelliteController : MonoBehaviour
     private void ThrustForward(float amount)
     {
         Vector2 force = transform.right * amount;
+        Debug.Log("Launching with Force: " + force + " at rotation: " + transform.rotation);
         remoteSatelliteRb.AddForce(force);
-        ClampVelocity();
+        //ClampVelocity();
     }
 
     public void DeploySatellite()
@@ -92,7 +96,7 @@ public class RemoteSatelliteController : MonoBehaviour
         // Set you filters here according to https://docs.unity3d.com/ScriptReference/ContactFilter2D.html
         int colliderCount = myCollider.OverlapCollider(contactFilter, colliders);
 
-        Debug.Log("Colliders Tocuhing: " + colliderCount);
+        //Debug.Log("Colliders Tocuhing: " + colliderCount);
 
         GameObject.Find("GameManager").GetComponent<GameManager>().remainingRemoteSatellites--;
 
