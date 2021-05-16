@@ -45,7 +45,7 @@ public class RemoteSatelliteController : MonoBehaviour
         transform.parent = null;
    
         //destroy targetting laser
-        //Destroy(transform.GetChild(0).gameObject);
+        Destroy(transform.GetChild(0).gameObject);
 
         //cannot have RB2D at launch, needs to generate once firing started
         remoteSatelliteRb = transform.gameObject.AddComponent<Rigidbody2D>();
@@ -55,7 +55,7 @@ public class RemoteSatelliteController : MonoBehaviour
         remoteSatelliteRb.freezeRotation = true;
 
 
-        //remoteSatelliteCC2D = gameObject.AddComponent<CircleCollider2D>();
+        remoteSatelliteCC2D = gameObject.AddComponent<CircleCollider2D>();
        
 
         Debug.Log("Launching Satellite!");

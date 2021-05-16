@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     {
         rocketRb = GetComponent<Rigidbody2D>();
         rocketRb.AddForce(Vector3.down * 1000, ForceMode2D.Impulse);
+        rocketRb.drag = .7f;
+
         isRemoteSatelliteLaunched = false;
 
     }
@@ -158,7 +160,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject[] satellites = GameObject.FindGameObjectsWithTag("RemoteSatellite");
 
-        Debug.Log("Number of remotes: " + satellites.Length);
+        //Debug.Log("Number of remotes: " + satellites.Length);
 
         bool isFirstSatelliteActived = false;
         for (int i = 0; i < satellites.Length; i++)
@@ -168,7 +170,7 @@ public class PlayerController : MonoBehaviour
                 satellites[i].transform.Translate(Vector3.right * .33f);
                 if (!isFirstSatelliteActived)
                 {
-                    Debug.Log("Activating Next Satellite");
+                    //Debug.Log("Activating Next Satellite");
                     satellites[i].GetComponent<RemoteSatelliteController>().isFirst = true;
                     isFirstSatelliteActived = true;
                 }
