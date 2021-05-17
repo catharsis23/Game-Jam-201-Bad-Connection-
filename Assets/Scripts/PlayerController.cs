@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool isRemoteSatelliteLaunched = false;
 
     private GameObject activeSatellite;
+    private bool isStilStranded = false;
 
     #region Monobehavior API
 
@@ -32,9 +33,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+        //check to see if velocity is zero, this is a game over condition
         if (!isConnected && rocketRb.velocity == Vector2.zero)
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().isStranded = true;
+
+
         }
 
         if (isConnected)
@@ -89,10 +93,10 @@ public class PlayerController : MonoBehaviour
             {
                
                     //activeSatellite = transform.GetChild(1).gameObject;
-                    activeSatellite.GetComponent<RemoteSatelliteController>().Launch();
+                    activeSatellite.GetComponent<RemoteSatelliteController>().Launch(transform.localScale.x);
                     isRemoteSatelliteLaunched = true;
 
-                    realignRemoteSatellites();
+                    RealignRemoteSatellites();
                 
 
             }
@@ -156,7 +160,7 @@ public class PlayerController : MonoBehaviour
 
     #region ammunition API
 
-    private void realignRemoteSatellites()
+    private void RealignRemoteSatellites()
     {
         GameObject[] satellites = GameObject.FindGameObjectsWithTag("RemoteSatellite");
 
@@ -180,7 +184,21 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    IEnumerator ValidateVelocityIsZero()
+    {
+        yield return new WaitForSeconds(.5f);
+        if (!isConnected && rocketRb.velocity == Vector2.zero)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().isStranded = true;
+        }
 
+    }
+
+    #region
+
+
+
+    #endregion
 
 
 }

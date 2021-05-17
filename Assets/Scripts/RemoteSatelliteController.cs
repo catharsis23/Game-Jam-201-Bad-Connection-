@@ -38,14 +38,14 @@ public class RemoteSatelliteController : MonoBehaviour
         }
     }
 
-    public void Launch()
+    public void Launch(float direction)
     {
 
         //detach from parent
         transform.parent = null;
    
         //destroy targetting laser
-        Destroy(transform.GetChild(0).gameObject);
+        //Destroy(transform.GetChild(0).gameObject);
 
         //cannot have RB2D at launch, needs to generate once firing started
         remoteSatelliteRb = transform.gameObject.AddComponent<Rigidbody2D>();
@@ -59,7 +59,7 @@ public class RemoteSatelliteController : MonoBehaviour
        
 
         Debug.Log("Launching Satellite!");
-        ThrustForward(1000);
+        ThrustForward(2000 * direction);
 
     }
 

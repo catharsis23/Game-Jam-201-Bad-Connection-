@@ -52,6 +52,12 @@ TagManager:
   - name: Background3
     uniqueID: 1347997047
     locked: 0
+  - name: Background4
+    uniqueID: 2772047853
+    locked: 0
+  - name: Background5
+    uniqueID: 969496665
+    locked: 0
   - name: Satellite
     uniqueID: 1234954211
     locked: 0
