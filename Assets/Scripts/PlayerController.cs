@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private GameObject activeSatellite;
     private bool isStilStranded = false;
 
+    public ParticleSystem bubbleParticles;
+
     #region Monobehavior API
 
     // Start is called before the first frame update
@@ -132,6 +134,8 @@ public class PlayerController : MonoBehaviour
 
     private void ThrustForward(float amount)
     {
+
+
         Vector2 force = transform.right * amount * (rocketRb.mass / 2);
         rocketRb.AddForce(force, ForceMode2D.Impulse);
         if (amount > 0)
