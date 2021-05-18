@@ -61,6 +61,9 @@ TagManager:
   - name: Satellite
     uniqueID: 1234954211
     locked: 0
+  - name: Signal
+    uniqueID: 3360476569
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

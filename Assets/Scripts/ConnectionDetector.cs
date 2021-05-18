@@ -14,6 +14,7 @@ public class ConnectionDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         sensor.GetComponent<SpriteRenderer>().color = onColor;
 
     }
@@ -21,22 +22,32 @@ public class ConnectionDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Entered Satellite!");
-        rocket.GetComponent<PlayerController>().isConnected = true;
-        connectionDisplay.GetComponent<Image>().color = onColor;
-        sensor.GetComponent<SpriteRenderer>().color = onColor;
+        if (collision.CompareTag("Satellite"))
+        {
+
+            rocket.GetComponent<PlayerController>().isConnected = true;
+            var sprite = Resources.Load<Sprite>("Signal/onsignal");
+            connectionDisplay.GetComponent<Image>().sprite = sprite;
+            sensor.GetComponent<SpriteRenderer>().color = onColor;
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Left Satellite!");
-        rocket.GetComponent<PlayerController>().isConnected = false;
-        connectionDisplay.GetComponent<Image>().color = offColor;
-        sensor.GetComponent<SpriteRenderer>().color = offColor;
+        if (collision.CompareTag("Satellite"))
+        {
+
+            Debug.Log("Left Satellite!");
+            rocket.GetComponent<PlayerController>().isConnected = false;
+            var sprite = Resources.Load<Sprite>("Signal/offsignal");
+            connectionDisplay.GetComponent<Image>().sprite = sprite;
+            sensor.GetComponent<SpriteRenderer>().color = offColor;
+        }
 
 
     }
@@ -44,9 +55,11 @@ public class ConnectionDetector : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("Left Satellite!");
-        if (collision.CompareTag("Satellite")) { 
+        if (collision.CompareTag("Satellite"))
+        {
             rocket.GetComponent<PlayerController>().isConnected = true;
-            connectionDisplay.GetComponent<Image>().color = onColor;
+            var sprite = Resources.Load<Sprite>("Signal/onsignal");
+            connectionDisplay.GetComponent<Image>().sprite = sprite;
             sensor.GetComponent<SpriteRenderer>().color = onColor;
         }
 

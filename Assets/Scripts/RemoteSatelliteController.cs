@@ -13,10 +13,15 @@ public class RemoteSatelliteController : MonoBehaviour
     public bool isActive;
     public bool isFirst;
 
+    public float startTime;
+
     // Start is called before the first frame update
     void Start()
     {
+
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -40,12 +45,13 @@ public class RemoteSatelliteController : MonoBehaviour
 
     public void Launch(float direction)
     {
+        startTime = Time.time;
 
         //detach from parent
         transform.parent = null;
    
         //destroy targetting laser
-        //Destroy(transform.GetChild(0).gameObject);
+        Destroy(transform.GetChild(0).gameObject);
 
         //cannot have RB2D at launch, needs to generate once firing started
         remoteSatelliteRb = transform.gameObject.AddComponent<Rigidbody2D>();
@@ -53,13 +59,18 @@ public class RemoteSatelliteController : MonoBehaviour
         remoteSatelliteRb.drag = 0;
         remoteSatelliteRb.angularDrag = 0;
         remoteSatelliteRb.freezeRotation = true;
+        remoteSatelliteRb.mass = 1;
+
 
 
         remoteSatelliteCC2D = gameObject.AddComponent<CircleCollider2D>();
-       
+        Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<PolygonCollider2D>(), GetComponent<CircleCollider2D>());
+        Physics2D.IgnoreCollision(GameObject.Find("Sensor").GetComponent<CircleCollider2D>(), GetComponent<CircleCollider2D>());
+
 
         Debug.Log("Launching Satellite!");
         ThrustForward(2000 * direction);
+
 
     }
 

@@ -44,19 +44,20 @@ public class PlayerController : MonoBehaviour
         if (isConnected)
         {
 
-           
+
 
 
             //only rotate while key down, do not move either
             if (Input.GetKey(KeyCode.Space) && isRemoteSatelliteLaunched == false)
             {
-                
+
                 if (activeSatellite == null)
                 {
                     Debug.Log("Setting active satellite");
                     for (int i = 1; i < transform.childCount; i++)
                     {
-                        if (transform.GetChild(i).CompareTag("RemoteSatellite")){
+                        if (transform.GetChild(i).CompareTag("RemoteSatellite"))
+                        {
                             if (transform.GetChild(i).gameObject.GetComponent<RemoteSatelliteController>().isActive == true)
                             {
                                 activeSatellite = transform.GetChild(i).gameObject;
@@ -91,13 +92,14 @@ public class PlayerController : MonoBehaviour
             //launch and deploy on key up not down
             if (Input.GetKeyUp(KeyCode.Space) && isRemoteSatelliteLaunched == false)
             {
-               
-                    //activeSatellite = transform.GetChild(1).gameObject;
-                    activeSatellite.GetComponent<RemoteSatelliteController>().Launch(transform.localScale.x);
-                    isRemoteSatelliteLaunched = true;
 
-                    RealignRemoteSatellites();
-                
+                //activeSatellite = transform.GetChild(1).gameObject;
+
+                activeSatellite.GetComponent<RemoteSatelliteController>().Launch(transform.localScale.x);
+                isRemoteSatelliteLaunched = true;
+
+                RealignRemoteSatellites();
+
 
             }
             else if (Input.GetKeyUp(KeyCode.Space) && isRemoteSatelliteLaunched == true)
@@ -147,7 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 force = transform.up * amount * (rocketRb.mass / 2);
         rocketRb.AddForce(force, ForceMode2D.Impulse);
-        
+
         ClampVelocity();
     }
 
