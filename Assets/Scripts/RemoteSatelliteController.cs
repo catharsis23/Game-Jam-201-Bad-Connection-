@@ -112,7 +112,9 @@ public class RemoteSatelliteController : MonoBehaviour
         GameObject.Find("GameManager").GetComponent<GameManager>().remainingRemoteSatellites--;
 
         GameObject.Find("RemoteSatelliteManager").GetComponent<RemoteSatelliteManager>().ActivateFirstSatellite();
+        GameObject.Find("RemoteSatelliteManager").GetComponent<RemoteSatelliteManager>().remainingSatellites--;
 
+        GameObject.Find("RemoteSatelliteManager").GetComponent<RemoteSatelliteManager>().UpdateCanvas();
 
     }
 

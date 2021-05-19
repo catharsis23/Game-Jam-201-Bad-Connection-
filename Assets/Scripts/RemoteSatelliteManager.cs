@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RemoteSatelliteManager : MonoBehaviour
 {
     public int startingNumberOfSatellites;
     public int remainingSatellites;
+    private string beaconText = "Signal Beacons Left: ";
 
     public GameObject remoteSatellite;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject canvas = GameObject.Find("Canvas");
+        canvas.transform.Find("RemainingSatellites").gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = beaconText + startingNumberOfSatellites;
+
         remainingSatellites = startingNumberOfSatellites;
         GameObject player = GameObject.Find("Player");
         for (int i = 0; i < startingNumberOfSatellites; i++)
@@ -61,5 +66,12 @@ public class RemoteSatelliteManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void UpdateCanvas()
+    {
+        Debug.Log("Updating Canvas");
+        GameObject canvas = GameObject.Find("Canvas");
+        canvas.transform.Find("RemainingSatellites").gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = beaconText + remainingSatellites;
     }
 }

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     //  public GameObject ground;
     private float groundPosition;
     private float maxVelocity = 10;
-    private float rotationSpeed = .5f;
+    private float rotationSpeed = 75f;
 
     public bool isConnected = false;
     public bool isRemoteSatelliteLaunched = false;
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool isStilStranded = false;
 
     public ParticleSystem bubbleParticles;
+    public bool isPaused = false;
 
     #region Monobehavior API
 
@@ -32,8 +33,49 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (isConnected)
+        {
+
+
+
+
+            //only rotate while key down, do not move either
+            if (Input.GetKey(KeyCode.Space) && isRemoteSatelliteLaunched == false)
+            {
+
+              
+
+
+            }
+            else
+            {
+                //handle controls
+                float yAxis = Input.GetAxis("Vertical");
+                float xAxis = Input.GetAxis("Horizontal");
+
+                ThrustForward(xAxis);
+                ThrustUp(yAxis);
+
+            }
+
+            
+
+
+        }
+
+    }
+
+    private void Update()
+    {
+        if((Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.M) || Input.GetKey(KeyCode.P)) && !isPaused)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().DisplayPauseMenu();
+        }
+
+
+
 
         //check to see if velocity is zero, this is a game over condition
         if (!isConnected && rocketRb.velocity == Vector2.zero)
@@ -82,12 +124,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                //handle controls
-                float yAxis = Input.GetAxis("Vertical");
-                float xAxis = Input.GetAxis("Horizontal");
-
-                ThrustForward(xAxis);
-                ThrustUp(yAxis);
+                
 
             }
 
@@ -136,7 +173,7 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        Vector2 force = transform.right * amount * (rocketRb.mass / 2);
+        Vector2 force = transform.right * amount * (rocketRb.mass);
         rocketRb.AddForce(force, ForceMode2D.Impulse);
         if (amount > 0)
         {
@@ -151,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
     private void ThrustUp(float amount)
     {
-        Vector2 force = transform.up * amount * (rocketRb.mass / 2);
+        Vector2 force = transform.up * amount * (rocketRb.mass);
         rocketRb.AddForce(force, ForceMode2D.Impulse);
 
         ClampVelocity();
@@ -159,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Transform t, float amount)
     {
-        t.Rotate(0, 0, amount);
+        t.Rotate(0, 0, amount * Time.deltaTime);
     }
 
     #endregion

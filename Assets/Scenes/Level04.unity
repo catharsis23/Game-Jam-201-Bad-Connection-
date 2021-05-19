@@ -158,7 +158,7 @@ Transform:
   - {fileID: 640955291}
   - {fileID: 1216323320}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &97501037 stripped
 GameObject:
@@ -397,59 +397,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &171159812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 171159814}
-  - component: {fileID: 171159813}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &171159813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171159812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69d59541920ef894db5ab70d38893bcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  remainingRemoteSatellites: 0
-  isOutOfBounds: 0
-  isStranded: 0
-  outOfBoundsText: {fileID: 979329287}
-  strandedText: {fileID: 516154317}
-  winText: {fileID: 1560970782}
-  failMenuButtons: {fileID: 1771852701}
-  successMenuButtons: {fileID: 2115039962}
-  gameOver: 0
-  win: 0
---- !u!4 &171159814
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171159812}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 367.8153, y: 225.07504, z: -43.112156}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &204710301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,11 +1263,6 @@ PolygonCollider2D:
       - {x: 7.18, y: -5.4}
       - {x: 9.599999, y: -5.4}
       - {x: 9.599999, y: 5.4}
---- !u!1 &516154317 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6149684401867295651, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-  m_PrefabInstance: {fileID: 620375256}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6149684402074797735, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6149684402074797735, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1580,38 +1522,6 @@ PrefabInstance:
     - target: {fileID: 6149684402074797755, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6149684402705031701, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 171159813}
-    - target: {fileID: 6149684402705031701, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 6149684402979253184, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 171159813}
-    - target: {fileID: 6149684402979253184, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NextLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 6149684403389346352, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 171159813}
-    - target: {fileID: 6149684403389346352, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 6149684403688799500, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 171159813}
-    - target: {fileID: 6149684403688799500, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
@@ -2158,7 +2068,7 @@ Transform:
   m_LocalScale: {x: 2.3987784, y: 2.3987784, z: 2.3987784}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &966948458
 GameObject:
@@ -2286,13 +2196,8 @@ Transform:
   - {fileID: 136708607}
   - {fileID: 1086600645}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &979329287 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6149684403148576780, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-  m_PrefabInstance: {fileID: 620375256}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1059991333
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,6 +3112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isConnected: 0
   isRemoteSatelliteLaunched: 0
+  bubbleParticles: {fileID: 0}
+  isPaused: 0
 --- !u!1 &1216323319
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,7 +3624,7 @@ Transform:
   m_Children:
   - {fileID: 753616690}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1477276051
 GameObject:
@@ -3801,11 +3708,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1560970782 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6149684401735831322, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-  m_PrefabInstance: {fileID: 620375256}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1600538206
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,7 +3738,7 @@ Transform:
   - {fileID: 97501038}
   - {fileID: 2134800931}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1703037966
 GameObject:
@@ -3966,11 +3868,6 @@ MonoBehaviour:
   startingNumberOfSatellites: 5
   remainingSatellites: 0
   remoteSatellite: {fileID: 1683941952818346392, guid: a336c1ca3e9115f4b8e417b89ca36620, type: 3}
---- !u!1 &1771852701 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6149684401760102614, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-  m_PrefabInstance: {fileID: 620375256}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1928809024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4315,11 +4212,6 @@ PolygonCollider2D:
       - {x: -7.12, y: -5.38}
       - {x: -7.0899997, y: -5.25}
       - {x: -7.1, y: -5.0899997}
---- !u!1 &2115039962 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6149684402855292825, guid: 2e4bbac18e8e7b645b8e4cab3b3ca786, type: 3}
-  m_PrefabInstance: {fileID: 620375256}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2134800930 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8894767072047905173, guid: 9cfe1c97d53401a43b943295043f91a0, type: 3}
