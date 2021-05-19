@@ -35,13 +35,13 @@ public class GameManager : MonoBehaviour
         {
             failMenuButtons.SetActive(true);
             int childrenCount = failMenuButtons.transform.childCount;
-            Debug.Log("Children: " + childrenCount);
+            //Debug.Log("Children: " + childrenCount);
             for (int i = 0; i < childrenCount; i++)
             {
                 GameObject child = failMenuButtons.transform.GetChild(i).gameObject;
                 child.SetActive(true);
                 int childChildrenCount = child.transform.childCount;
-                Debug.Log("Children: " + childrenCount);
+                //Debug.Log("Children: " + childrenCount);
                 for (int j = 0; j < childChildrenCount; j++)
                 {
                     child.transform.GetChild(j).gameObject.SetActive(true);
@@ -54,13 +54,13 @@ public class GameManager : MonoBehaviour
             winText.SetActive(true);
             successMenuButtons.SetActive(true);
             int childrenCount = successMenuButtons.transform.childCount;
-            Debug.Log("Children: " + childrenCount);
+            //Debug.Log("Children: " + childrenCount);
             for (int i = 0; i < childrenCount; i++)
             {
                 GameObject child = successMenuButtons.transform.GetChild(i).gameObject;
                 child.SetActive(true);
                 int childChildrenCount = child.transform.childCount;
-                Debug.Log("Children: " + childrenCount);
+                //Debug.Log("Children: " + childrenCount);
                 for (int j = 0; j < childChildrenCount; j++)
                 {
                     child.transform.GetChild(j).gameObject.SetActive(true);
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quitting Game!");
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     public void ResumeGame()
