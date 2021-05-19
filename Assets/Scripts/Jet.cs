@@ -23,7 +23,16 @@ public class Jet : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, collision.gameObject.GetComponent<Rigidbody2D>().velocity.y);
+            if (direction == Vector3.left || direction == Vector3.right)
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(collision.gameObject.GetComponent<Rigidbody2D>().velocity.x, 0f);
+
+            }
+            if (direction == Vector3.up || direction == Vector3.down)
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, collision.gameObject.GetComponent<Rigidbody2D>().velocity.y);
+
+            }
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(150 * direction, ForceMode2D.Impulse);
         }
 
@@ -33,8 +42,16 @@ public class Jet : MonoBehaviour
             Debug.Log("Time Alive: " + (Time.time - startTime));
             if ((Time.time - startTime) > .15)
             {
+                if (direction == Vector3.left || direction == Vector3.right)
+                {
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(collision.gameObject.GetComponent<Rigidbody2D>().velocity.x, 0f);
 
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, collision.gameObject.GetComponent<Rigidbody2D>().velocity.y);
+                }
+                if (direction == Vector3.up || direction == Vector3.down)
+                {
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, collision.gameObject.GetComponent<Rigidbody2D>().velocity.y);
+
+                }
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(strength * direction, ForceMode2D.Impulse);
             }
         }
@@ -66,8 +83,8 @@ public class Jet : MonoBehaviour
 
     IEnumerator PropelSub(Collider2D collision)
     {
-        yield return new WaitForSeconds(1);
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(strength * direction, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(.5f);
+        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(strength * 3 * direction, ForceMode2D.Impulse);
         coRoutineStarted = false;
 
     }

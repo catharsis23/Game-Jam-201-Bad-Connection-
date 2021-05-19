@@ -37,4 +37,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(levelNumber);
     }
+
+    public void Start()
+    {
+        Time.timeScale = 1;
+
+    }
 }

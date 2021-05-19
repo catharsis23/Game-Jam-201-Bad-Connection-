@@ -117,18 +117,19 @@ public class GameManager : MonoBehaviour
 
     public void HidePauseMenu()
     {
+        Debug.Log("Un-Pausing");
 
         Time.timeScale = 1;
 
         pauseMenu.SetActive(false);
         int childrenCount = pauseMenu.transform.childCount;
-        Debug.Log("Children: " + childrenCount);
+        //Debug.Log("Children: " + childrenCount);
         for (int i = 0; i < childrenCount; i++)
         {
             GameObject child = pauseMenu.transform.GetChild(i).gameObject;
             child.SetActive(false);
             int childChildrenCount = child.transform.childCount;
-            Debug.Log("Children: " + childrenCount);
+            //Debug.Log("Children: " + childrenCount);
             for (int j = 0; j < childChildrenCount; j++)
             {
                 child.transform.GetChild(j).gameObject.SetActive(false);
@@ -138,17 +139,18 @@ public class GameManager : MonoBehaviour
 
     public void DisplayPauseMenu()
     {
+        Debug.Log("Pausing");
         Time.timeScale = 0;
 
         pauseMenu.SetActive(true);
         int childrenCount = pauseMenu.transform.childCount;
-        Debug.Log("Children: " + childrenCount);
+        //Debug.Log("Children: " + childrenCount);
         for (int i = 0; i < childrenCount; i++)
         {
             GameObject child = pauseMenu.transform.GetChild(i).gameObject;
             child.SetActive(true);
             int childChildrenCount = child.transform.childCount;
-            Debug.Log("Children: " + childrenCount);
+            //Debug.Log("Children: " + childrenCount);
             for (int j = 0; j < childChildrenCount; j++)
             {
                 child.transform.GetChild(j).gameObject.SetActive(true);
