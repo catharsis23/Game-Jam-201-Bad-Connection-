@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
 
             //only rotate while key down, do not move either
-            if (Input.GetKey(KeyCode.Space) && isRemoteSatelliteLaunched == false)
+            if (Input.GetKey(KeyCode.Space) && isRemoteSatelliteLaunched == false && DoSatellitesRemain())
             {
 
                 if (activeSatellite == null)
@@ -134,19 +134,24 @@ public class PlayerController : MonoBehaviour
 
                 //activeSatellite = transform.GetChild(1).gameObject;
 
-                activeSatellite.GetComponent<RemoteSatelliteController>().Launch(transform.localScale.x);
-                isRemoteSatelliteLaunched = true;
+                if (activeSatellite != null)
+                {
+                    activeSatellite.GetComponent<RemoteSatelliteController>().Launch(transform.localScale.x);
+                    isRemoteSatelliteLaunched = true;
 
-                RealignRemoteSatellites();
+                    RealignRemoteSatellites();
+                }
 
 
             }
             else if (Input.GetKeyUp(KeyCode.Space) && isRemoteSatelliteLaunched == true)
             {
-                activeSatellite.GetComponent<RemoteSatelliteController>().DeploySatellite();
-                isRemoteSatelliteLaunched = false;
-                activeSatellite = null;
-
+                if (activeSatellite != null)
+                {
+                    activeSatellite.GetComponent<RemoteSatelliteController>().DeploySatellite();
+                    isRemoteSatelliteLaunched = false;
+                    activeSatellite = null;
+                }
 
 
             }
@@ -237,11 +242,19 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public bool DoSatellitesRemain()
+    {
+        return GameObject.Find("GameManager").GetComponent<GameManager>().remainingRemoteSatellites > 0;
+
+    }
+
     #region
 
 
 
     #endregion
+
+
 
 
 }

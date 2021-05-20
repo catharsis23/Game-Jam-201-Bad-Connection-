@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("BuildIndex: " + SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("SceneCount: " + SceneManager.sceneCountInBuildSettings);
         remainingRemoteSatellites = GameObject.Find("RemoteSatelliteManager").GetComponent<RemoteSatelliteManager>().startingNumberOfSatellites;
         GameObject.Find("LevelCounter").gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = "Level " + SceneManager.GetActiveScene().buildIndex;
 
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
         {
             winText.SetActive(true);
             successMenuButtons.SetActive(true);
+
             int childrenCount = successMenuButtons.transform.childCount;
             //Debug.Log("Children: " + childrenCount);
             for (int i = 0; i < childrenCount; i++)
@@ -68,6 +71,11 @@ public class GameManager : MonoBehaviour
             }
             GameObject.Find("Player").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GameObject.Find("Player").GetComponent<PlayerController>().isConnected = false;
+
+            if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+            {
+                successMenuButtons.transform.Find("NextLevelButton").gameObject.SetActive(false);
+            }
 
 
         }
